@@ -7,15 +7,17 @@ const pokemondata = require('./models/pokemon.js')
 app.set("view engine","jsx");
 app.engine("jsx",require("express-react-views").createEngine())
 
-app.get('/',(req,res) => {
-    res.send("<a href=/pokemon><h1>WELCOME TO THE POKEMON APP</h1></a>")
-})
-
-
 app.use(express.urlencoded({extended:false}))
 app.use((req,res,next) => {
     next()
 })
+
+app.get('/',(req,res) => {
+    res.send("<a href=/pokemon><h1 style=text-align:center>WELCOME TO THE POKEMON APP</h1></a>")
+})
+
+
+
 
 app.get('/pokemon',(req,res) => {
     res.render('Index',{
@@ -23,12 +25,35 @@ app.get('/pokemon',(req,res) => {
         )
 })
 
+app.get('/pokemon/new',(req,res) => {
+    res.render("New",{
+        data:pokemondata
+    })
+})
+
+// app.get("/pokemon/showall",(req,res) => {
+//     res.render("ShowAllPokemonGrid",{
+//         data:pokemondata
+//     })
+// })
+
 
 app.get('/pokemon/:indexOfPokemon',(req,res) => {
     res.render("Show",{
        poke:pokemondata[req.params.indexOfPokemon] 
     })
 })
+
+
+
+
+app.post("/pokemon",(req,res) => {
+    pokemondata.push(req.body)
+    res.redirect("/pokemon")
+})
+
+
+
 
 
 

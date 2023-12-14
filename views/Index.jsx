@@ -4,6 +4,7 @@ function Index(props) {
   return (
     <div>
         <h1>SEE ALL THE POKEMON!</h1>
+        <h3><a href="/pokemon/new">Create New Pokemon</a></h3>
         <ul>
             {
                 props.data.map((poke,i) => {
