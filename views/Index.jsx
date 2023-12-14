@@ -1,8 +1,20 @@
 import React from 'react'
 
-function Index() {
+function Index(props) {
   return (
-    <div>Index</div>
+    <div>
+        <h1>SEE ALL THE POKEMON!</h1>
+        <ul>
+            {
+                props.data.map((poke,i) => {
+                    return (
+                        <li style={{lineHeight:"4em",fontSize:"20px"}}><a href={`/pokemon/${i}`}>{poke.name.charAt(0).toUpperCase()+poke.name.substring(1)}</a></li>
+                    )
+                })
+            }
+            
+        </ul>
+    </div>
   )
 }
 
